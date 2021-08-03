@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\StoriesController;
+use App\Http\Controllers\Home\GalleryController;
+use App\Http\Controllers\Home\DonateController;
+use App\Http\Controllers\Home\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
+
+Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/stories',[StoriesController::class,'stories'])->name('stories');
+Route::get('/gallery',[GalleryController::class,'gallery'])->name('gallery');
+
+Route::get('/donate',[DonateController::class,'donate'])->name('donate');
+Route::get('/about',[AboutController::class,'about'])->name('about');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

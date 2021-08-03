@@ -105,7 +105,7 @@ class SubcategoryController extends Controller
         $subcategory->keywords = trim(strtolower($request->input('keywords')));
         $subcategory->category_id = $request->input('parent_id');
         $subcategory->menu_status = $request->input('menu_status');
-            
+
         if ($subcategory->save()) {
             return redirect()->route('admin.subcategory.view')->with('success', 'Subcategory successfully updated');
         } else {
