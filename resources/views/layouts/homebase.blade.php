@@ -29,7 +29,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li> --}}
 
-                  @foreach ($navigations as $n)
+                  @foreach ($navigations->where('title', '!=', 'home') as $n)
 
                     <li class="nav-item dropdown">
                         <a class="nav-link  @if ($n->category->child->count() > 0) dropdown-toggle
