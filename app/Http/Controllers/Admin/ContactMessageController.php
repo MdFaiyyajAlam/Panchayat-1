@@ -15,7 +15,8 @@ class ContactMessageController extends Controller
      */
     public function index()
     {
-        //
+        $contactMessages = ContactMessage::all();
+        return view('admin_dashboard.contact-message.index', compact('contactMessages'));
     }
 
     /**
@@ -81,6 +82,12 @@ class ContactMessageController extends Controller
      */
     public function destroy(ContactMessage $contactMessage)
     {
-        //
+        $deleted = $contactMessage->delete();
+        if ($deleted) {
+            return redirect()->route('admin.contactMessage.view')->with('success', 'Contact message successfully deleted');
+        } else {
+            return redirect()->route('admin.contactMessage.view')->with('error', 'Contact message not deleted');
+        }
+        
     }
 }

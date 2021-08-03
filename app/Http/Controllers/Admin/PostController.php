@@ -78,7 +78,7 @@ class PostController extends Controller
         $save = Post::create([
             'post_type' => trim(strtolower($request->input('post_type'))),
             'title' => trim(strtolower($request->input('title'))),
-            'slug' => trim(strtolower($request->input('slug'))) ? trim(strtolower($request->input('slug'))) : strtolower($request->input('title')),
+            'slug' => trim(strtolower($request->input('slug'))),
             'description' => trim(strtolower($request->input('description'))),
             'keywords' => trim(strtolower($request->input('keywords'))),
             'visibility' => $request->input('visibility'),

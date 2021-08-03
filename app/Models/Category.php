@@ -37,16 +37,4 @@ class Category extends Model
         return $this->hasMany(Post::class, 'category_id', 'id');
     }
 
-    public function setSlugAttribute($val)
-    {
-        $slug = trim(preg_replace("/[^\w\d]+/i", "-", $val), "-");
-        $count = Category::where('slug', 'like', "%{$slug}%")->count();
-        if($count > 0){
-            $slug = $slug."-".($count+1);
-            $this->attributes['slug'] = strtolower($slug);
-        } else {
-            $this->attributes['slug'] = strtolower($slug);
-        }
-    }
-
 }

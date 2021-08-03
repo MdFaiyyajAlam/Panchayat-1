@@ -72,16 +72,4 @@ class Post extends Model
         return $this->hasMany(Comment::class, 'post_id', 'id');
     }
 
-    public function setSlugAttribute($val)
-    {
-        $slug = trim(preg_replace("/[^\w\d]+/i", "-", $val), "-");
-        $count = Post::where('slug', 'like', "%{$slug}%")->count();
-        if($count > 0){
-            $slug = $slug."-".($count+1);
-            $this->attributes['slug'] = strtolower($slug);
-        } else {
-            $this->attributes['slug'] = strtolower($slug);
-        }
-    }
-
 }

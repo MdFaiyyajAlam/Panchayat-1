@@ -15,7 +15,8 @@ class WidgetController extends Controller
      */
     public function index()
     {
-        //
+        $widgets = Widget::all();
+        return view('admin_dashboard.widget/index', compact('widgets'));
     }
 
     /**
@@ -25,7 +26,7 @@ class WidgetController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin_dashboard.widget/create');
     }
 
     /**
@@ -36,7 +37,23 @@ class WidgetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required'
+        ]);
+
+        $save = Widget::create([
+            'title' => trim(strtolower($request->input('title'))),
+            'widget_order' => $request->input('order'),
+            'visibility' => $request->input('visibility'),
+            'content' => $request->input('content'),
+        ]);
+
+        if ($save) {
+            return redirect()->route('admin.widget.view')->with('success', 'Widget successfully created');
+        } else {
+            return redirect()->route('admin.widget.view')->with('error', 'Widget not created');
+        }
+        
     }
 
     /**
@@ -58,7 +75,7 @@ class WidgetController extends Controller
      */
     public function edit(Widget $widget)
     {
-        //
+        return view('admin_dashboard.widget/edit', compact('widget'));
     }
 
     /**
@@ -70,7 +87,20 @@ class WidgetController extends Controller
      */
     public function update(Request $request, Widget $widget)
     {
-        //
+        $request->validate([
+            'title' => 'required'
+        ]);
+
+        $widget->title = trim(strtolower($request->input('title')));
+        $widget->widget_order = $request->input('order');
+        $widget->visibility = $request->input('visibility');
+        $widget->content = $request->input('content');
+
+        if ($widget->save()) {
+            return redirect()->route('admin.widget.view')->with('success', 'Widget successfully created');
+        } else {
+            return redirect()->route('admin.widget.view')->with('error', 'Widget not created');
+        }
     }
 
     /**
@@ -81,6 +111,10 @@ class WidgetController extends Controller
      */
     public function destroy(Widget $widget)
     {
-        //
+        if ($widget->delete()) {
+            return redirect()->route('admin.widget.view')->with('success', 'Widget successfully deleted');
+        } else {
+            return redirect()->route('admin.widget.view')->with('error', 'Widget not deleted');
+        }
     }
 }

@@ -28,6 +28,8 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'status',
     ];
 
     /**
@@ -63,6 +65,11 @@ class Admin extends Authenticatable
     function adminProfile()
     {
         return $this->hasOne(AdminProfile::class, 'admin_id', 'id');
+    }
+
+    function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
     function posts()

@@ -21,6 +21,7 @@ class AdminSeeder extends Seeder
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make(123),
+            'role_id' => 1,
         ]);
         if ($admin) {
             $profile = new AdminProfile;

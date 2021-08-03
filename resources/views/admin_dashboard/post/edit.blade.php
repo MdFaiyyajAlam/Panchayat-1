@@ -33,14 +33,14 @@
                             {{-- title --}}
                             <div class="col-12 mt-3">
                                 <label for="title" class="form-label">Title</label>
-                                <input type="text" name="title" class="form-control text-truncate" id="title" placeholder="Title" value="{{ucwords($post->title)}}">
+                                <input type="text" name="title" class="form-control text-truncate" onkeyup="createSlug(this)" id="title" placeholder="Title" value="{{ucwords($post->title)}}">
                             </div>
                             {{-- slug --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">Slug
                                     <small>(If you leave it blank, it will be generated automatically.)</small>
                                 </label>
-                                <input type="text" class="form-control" name="slug" placeholder="Slug" value="{{$post->slug}}">
+                                <input type="text" class="form-control" name="slug" data-slug="slug" placeholder="Slug" value="{{$post->slug}}">
                             </div>
                             {{-- description --}}
                             <div class="col-12 mt-3">

@@ -50,9 +50,6 @@ function init_tinymce(selector, min_height) {
     tinymce.DOM.loadCSS('../../assets/plugins/tinymce/editor_ui.css');
 }
 
-if ($('.tinyMCE').length > 0) {
-    init_tinymce('textarea.tinyMCE', 500);
-}
 if ($('.tinyMCEsmall').length > 0) {
     init_tinymce('textarea.tinyMCEsmall', 300);
 }

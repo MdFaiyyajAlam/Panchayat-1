@@ -33,14 +33,14 @@
                             {{-- title --}}
                             <div class="col-12 mt-3">
                                 <label for="title" class="form-label">Title</label>
-                                <input type="text" name="title" class="form-control" id="title" placeholder="Title">
+                                <input type="text" name="title" onkeyup="createSlug(this)" class="form-control" id="title" placeholder="Title">
                             </div>
                             {{-- slug --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">Slug
                                     <small>(If you leave it blank, it will be generated automatically.)</small>
                                 </label>
-                                <input type="text" class="form-control" name="slug" placeholder="Slug">
+                                <input type="text" class="form-control" name="slug" data-slug="slug" placeholder="Slug">
                             </div>
                             {{-- description --}}
                             <div class="col-12 mt-3">

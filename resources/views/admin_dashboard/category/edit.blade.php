@@ -26,7 +26,7 @@
                             {{-- name --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">Category Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Category Name" value="{{$category->name}}" required>
+                                <input type="text" name="name" class="form-control" onkeyup="createSlug(this)" placeholder="Category Name" value="{{ucwords($category->name)}}" required>
                             </div>
                             {{-- slug --}}
                             <div class="col-12 mt-3">
@@ -35,28 +35,28 @@
                                         (If you leave it blank, it will be generated automatically.)
                                     </small>
                                 </label>
-                                <input type="text" class="form-control" name="slug" value="{{$category->slug}}" placeholder="Slug">
+                                <input type="text" class="form-control" name="slug" data-slug="slug" value="{{$category->slug}}" placeholder="Slug">
                             </div>
                             {{-- description --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">
                                     Description (Meta Tag)
                                 </label>
-                                <input type="text" class="form-control" name="description" value="{{$category->description}}" placeholder="Description (Meta Tag)">
+                                <input type="text" class="form-control" name="description" value="{{ucwords($category->description)}}" placeholder="Description (Meta Tag)">
                             </div>
                             {{-- keywords --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">
                                     Keywords (Meta Tag)
                                 </label>
-                                <input type="text" class="form-control" name="keywords" value="{{$category->keywords}}" placeholder="Keywords (Meta Tag)">
+                                <input type="text" class="form-control" name="keywords" value="{{ucwords($category->keywords)}}" placeholder="Keywords (Meta Tag)">
                             </div>
                             {{-- color --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">Color</label>
-                                <div class="input-group colorpicker">
-                                    <input type="text" name="color" value="{{$category->color}}" class="form-control" maxlength="200" placeholder="Color" required>
-                                    <span class="input-group-text input-group-addon"><i></i></span>
+                                <div class="input-group">
+                                    <input type="text" id="color" name="color" value="{{$category->color}}" class="form-control" maxlength="200" placeholder="Color" required>
+                                    <span class="colorpicker"></span>
                                 </div>
                             </div>
                             {{-- menu order --}}
@@ -67,25 +67,25 @@
                             {{-- show on menu --}}
                             <div class="col-12 mt-3">
                                 <div class="row g-sm-2">
-                                    <div class="col-md-4 col-sm-12">
+                                    <div class="col-xl-2 col-md-3 col-sm-12">
                                         <label class="fw-bold">Show on Menu</label>
                                     </div>
                                     @if ($category->navigation->menu_status == 1)
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="menu_status" value="1" checked>
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="menu_status" class="polaris" value="1" checked>
                                             <label class="cursor-pointer">Yes</label>
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="menu_status" value="0">
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="menu_status" class="polaris" value="0">
                                             <label class="cursor-pointer">No</label>
                                         </div>
                                     @else
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="menu_status" value="1">
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="menu_status" class="polaris" value="1">
                                             <label class="cursor-pointer">Yes</label>
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="menu_status" value="0" checked>
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="menu_status" class="polaris" value="0" checked>
                                             <label class="cursor-pointer">No</label>
                                         </div>
                                     @endif
@@ -94,25 +94,25 @@
                             {{-- show on homepage --}}
                             <div class="col-12 mt-3">
                                 <div class="row g-sm-2">
-                                    <div class="col-md-4 col-sm-12">
+                                    <div class="col-xl-2 col-md-3 col-sm-12">
                                         <label class="fw-bold">Show on Homepage</label>
                                     </div>
                                     @if ($category->navigation->home_status == 1)
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="home_status" value="1" checked>
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="home_status" value="1" class="polaris" checked>
                                             <label class="cursor-pointer">Yes</label>
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="home_status" value="0">
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="home_status" value="0" class="polaris">
                                             <label class="cursor-pointer">No</label>
                                         </div>
                                     @else
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="home_status" value="1">
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="home_status" value="1" class="polaris">
                                             <label class="cursor-pointer">Yes</label>
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="home_status" value="0" checked>
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="home_status" value="0" class="polaris" checked>
                                             <label class="cursor-pointer">No</label>
                                         </div>
                                     @endif
@@ -126,31 +126,31 @@
                                     @if ($category->navigation->block_type == 'block-1')
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-1" checked>
+                                                <input type="radio" name="block_type" value="block-1" class="polaris" checked>
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-1.png" alt="block-1" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-2">
+                                                <input type="radio" name="block_type" value="block-2" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-2.png" alt="block-2" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column justify-content-center">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-3">
+                                                <input type="radio" name="block_type" value="block-3" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-3.png" alt="block-3" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-4">
+                                                <input type="radio" name="block_type" value="block-4" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-4.png" alt="block-4" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-5">
+                                                <input type="radio" name="block_type" value="block-5" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-5.png" alt="block-5" class="img-fluid img-thumbnail">
                                         </div>
@@ -159,31 +159,31 @@
                                     @if ($category->navigation->block_type == 'block-2')
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-1">
+                                                <input type="radio" name="block_type" value="block-1" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-1.png" alt="block-1" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-2" checked>
+                                                <input type="radio" name="block_type" value="block-2" class="polaris" checked>
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-2.png" alt="block-2" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column justify-content-center">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-3">
+                                                <input type="radio" name="block_type" value="block-3" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-3.png" alt="block-3" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-4">
+                                                <input type="radio" name="block_type" value="block-4" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-4.png" alt="block-4" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-5">
+                                                <input type="radio" name="block_type" value="block-5" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-5.png" alt="block-5" class="img-fluid img-thumbnail">
                                         </div>
@@ -192,31 +192,31 @@
                                     @if ($category->navigation->block_type == 'block-3')
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-1">
+                                                <input type="radio" name="block_type" value="block-1" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-1.png" alt="block-1" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-2">
+                                                <input type="radio" name="block_type" value="block-2" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-2.png" alt="block-2" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column justify-content-center">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-3" checked>
+                                                <input type="radio" name="block_type" value="block-3" class="polaris" checked>
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-3.png" alt="block-3" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-4">
+                                                <input type="radio" name="block_type" value="block-4" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-4.png" alt="block-4" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-5">
+                                                <input type="radio" name="block_type" value="block-5" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-5.png" alt="block-5" class="img-fluid img-thumbnail">
                                         </div>
@@ -225,31 +225,31 @@
                                     @if ($category->navigation->block_type == 'block-4')
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-1">
+                                                <input type="radio" name="block_type" value="block-1" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-1.png" alt="block-1" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-2">
+                                                <input type="radio" name="block_type" value="block-2" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-2.png" alt="block-2" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column justify-content-center">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-3">
+                                                <input type="radio" name="block_type" value="block-3" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-3.png" alt="block-3" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-4" checked>
+                                                <input type="radio" name="block_type" value="block-4" class="polaris" checked>
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-4.png" alt="block-4" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-5">
+                                                <input type="radio" name="block_type" value="block-5" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-5.png" alt="block-5" class="img-fluid img-thumbnail">
                                         </div>
@@ -258,31 +258,31 @@
                                     @if ($category->navigation->block_type == 'block-5')
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-1">
+                                                <input type="radio" name="block_type" value="block-1" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-1.png" alt="block-1" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-2">
+                                                <input type="radio" name="block_type" value="block-2" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-2.png" alt="block-2" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column justify-content-center">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-3">
+                                                <input type="radio" name="block_type" value="block-3" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-3.png" alt="block-3" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-4">
+                                                <input type="radio" name="block_type" value="block-4" class="polaris">
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-4.png" alt="block-4" class="img-fluid img-thumbnail">
                                         </div>
                                         <div class="col d-flex flex-column">
                                             <div class="text-center mb-3">
-                                                <input type="radio" name="block_type" value="block-5" checked>
+                                                <input type="radio" name="block_type" value="block-5" class="polaris" checked>
                                             </div>
                                             <img src="https://biharyojna.com/assets/admin/img/block-5.png" alt="block-5" class="img-fluid img-thumbnail">
                                         </div>
@@ -295,8 +295,7 @@
                         </form>
                     </x-slot>
                 </x-bootstrap.card>
-            </div>
-            
+            </div> class="polaris"
         </div>
     
     </div>

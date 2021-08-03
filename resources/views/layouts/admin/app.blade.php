@@ -38,6 +38,7 @@
         <!-- Input tags -->
         <link href="{{ asset('assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
         <!-- Color picker -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
         <link href="{{ asset('assets/plugins/colorpicker/bootstrap-colorpicker.min.css') }}" rel="stylesheet" />
         <!-- Sweet Alert -->
         <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css" rel="stylesheet" />
@@ -105,6 +106,7 @@
         <!-- Sweet Alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
         <!-- Color picker -->
+        <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
         <script src="{{ asset('assets/plugins/colorpicker/bootstrap-colorpicker.min.js') }}"></script>
         <!--app JS-->
         <script src="{{ asset('assets/js/app.js') }}"></script>
@@ -114,6 +116,7 @@
         <script src="{{ mix('js/tinymce.js') }}"></script>
         
         @stack('js')
+        
         {{-- Notification --}}
         <script>
             @if (session()->has('success'))
@@ -157,14 +160,54 @@
                 }
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // deleteNav.submit();
-                        console.log(deleteNav);
+                        deleteNav.submit();
+                        // console.log(deleteNav);
                     }
                 });
             }
 
             //Color Picker with addon
-            $(".colorpicker").colorpicker();
+            var pickr = Pickr.create({
+                el: '.colorpicker',
+                theme: 'classic', // or 'monolith', or 'nano'
+
+                swatches: [
+                    'rgba(244, 67, 54, 1)',
+                    'rgba(233, 30, 99, 0.95)',
+                    'rgba(156, 39, 176, 0.9)',
+                    'rgba(103, 58, 183, 0.85)',
+                    'rgba(63, 81, 181, 0.8)',
+                    'rgba(33, 150, 243, 0.75)',
+                    'rgba(3, 169, 244, 0.7)',
+                    'rgba(0, 188, 212, 0.7)',
+                    'rgba(0, 150, 136, 0.75)',
+                    'rgba(76, 175, 80, 0.8)',
+                    'rgba(139, 195, 74, 0.85)',
+                    'rgba(205, 220, 57, 0.9)',
+                    'rgba(255, 235, 59, 0.95)',
+                    'rgba(255, 193, 7, 1)'
+                ],
+
+                components: {
+
+                    // Main components
+                    preview: true,
+                    opacity: true,
+                    hue: true,
+
+                    // Input / output Options
+                    interaction: {
+                        input: true,
+                        save: true,
+                    }
+                }
+            });
+            // Change Input value
+            pickr.on('change', (color, instance) => {
+                document.querySelector('#color').value = color.toHEXA().toString();
+                instance.applyColor();
+            });
+                        
         </script>
         
         @livewireScripts
