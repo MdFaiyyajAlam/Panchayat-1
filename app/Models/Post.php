@@ -67,6 +67,11 @@ class Post extends Model
         return $this->belongsTo(PostImageGallery::class, 'post_image_gallery_id', 'id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
+
     public function setSlugAttribute($val)
     {
         $slug = trim(preg_replace("/[^\w\d]+/i", "-", $val), "-");

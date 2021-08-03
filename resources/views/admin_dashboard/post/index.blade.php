@@ -40,9 +40,7 @@
                                         <td class="text-center border-end"><span>{{$list->id}}</span></td>
                                         <td class="border-end">
                                             <div class="d-flex">
-                                                <div style="width: 120px !important;height:120px;">
-                                                    <img src="{{$list->post_image_gallery_id ? asset('storage/media/images/post_image_gallery/'.$list->mainImage->image) : ''}}" alt="{{$list->title}}" style="height:100%;">
-                                                </div>
+                                                <img src="{{$list->post_image_gallery_id ? asset('storage/media/images/post_image_gallery/'.$list->mainImage->image) : ''}}" alt="{{$list->title}}" style="width: 120px;height:120px;object-fit:contain">
                                                 <div class="d-flex flex-column mx-2">
                                                     <a href="" class="mb-3 fw-bold text-dark small">{{strtoupper($list->title)}}</a>
                                                     <div class="d-flex">
@@ -89,7 +87,7 @@
                             </tbody>
                         </table>
                         {{-- Delete post or add / remove post from post type --}}
-                        <div class="pull-left bulk-options my-3">
+                        <div class="bulk-options my-3">
                             <button class="btn btn-sm btn-danger btn-table-delete" onclick="delete_selected_posts('Are you sure you want to delete selected posts?');">
                                 <i class="bx bx-trash bx-xs pb-1 option-icon"></i>
                                 Delete
