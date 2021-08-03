@@ -29,7 +29,8 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        return view('admin_dashboard.subcategory.create');
+        $categories = Category::all();
+        return view('admin_dashboard.subcategory.create', compact('categories'));
     }
 
     /**
@@ -47,11 +48,11 @@ class SubcategoryController extends Controller
         ]);
 
         $save = Subcategory::create([
-            'name' => strtolower($request->input('name')),
-            'slug' => trim(strtolower($request->input('slug'))) ? trim(strtolower($request->input('slug'))) : strtolower($request->input('name')),
-            'category_id' => $request->input('parent_id'),
+            'name' => trim(strtolower($request->input('name'))),
+            'slug' => trim(strtolower($request->input('slug'))),
             'description' => trim(strtolower($request->input('description'))),
             'keywords' => trim(strtolower($request->input('keywords'))),
+            'category_id' => $request->input('parent_id'),
             'menu_status' => $request->input('menu_status'),
         ]);
         if ($save) {
@@ -95,7 +96,7 @@ class SubcategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'unique:categories,slug,'.$subcategory->id,
+            'slug' => 'unique:subcategories,slug,'.$subcategory->id,
             'parent_id' => 'required',
         ]);
         $subcategory->name = strtolower($request->input('name'));

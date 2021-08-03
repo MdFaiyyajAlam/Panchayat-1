@@ -26,7 +26,7 @@
                             {{-- name --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">Category Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Category Name" value="{{$subcategory->name}}" required>
+                                <input type="text" name="name" class="form-control" onkeyup="createSlug(this)" placeholder="Category Name" value="{{ucwords($subcategory->name)}}" required>
                             </div>
                             {{-- slug --}}
                             <div class="col-12 mt-3">
@@ -35,21 +35,21 @@
                                         (If you leave it blank, it will be generated automatically.)
                                     </small>
                                 </label>
-                                <input type="text" class="form-control" name="slug" value="{{$subcategory->slug}}" placeholder="Slug">
+                                <input type="text" class="form-control" name="slug" data-slug="slug" value="{{$subcategory->slug}}" placeholder="Slug">
                             </div>
                             {{-- description --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">
                                     Description (Meta Tag)
                                 </label>
-                                <input type="text" class="form-control" name="description" value="{{$subcategory->description}}" placeholder="Description (Meta Tag)">
+                                <input type="text" class="form-control" name="description" value="{{ucwords($subcategory->description)}}" placeholder="Description (Meta Tag)">
                             </div>
                             {{-- keywords --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">
                                     Keywords (Meta Tag)
                                 </label>
-                                <input type="text" class="form-control" name="keywords" value="{{$subcategory->keywords}}" placeholder="Keywords (Meta Tag)">
+                                <input type="text" class="form-control" name="keywords" value="{{ucwords($subcategory->keywords)}}" placeholder="Keywords (Meta Tag)">
                             </div>
                             {{-- parent category --}}
                             <div class="col-12 mt-3">
@@ -70,26 +70,26 @@
                             </div>
                             {{-- show on menu --}}
                             <div class="col-12 mt-3">
-                                <div class="row g-sm-2">
-                                    <div class="col-md-4 col-sm-12">
+                                <div class="row g-sm-2 d-flex align-items-center">
+                                    <div class="col-xl-2 col-md-3 col-sm-12">
                                         <label class="fw-bold">Show on Menu</label>
                                     </div>
                                     @if ($subcategory->menu_status == 1)
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="menu_status" value="1" checked>
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="menu_status" class="polaris" value="1" checked>
                                             <label class="cursor-pointer">Yes</label>
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="menu_status" value="0">
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="menu_status" class="polaris" value="0">
                                             <label class="cursor-pointer">No</label>
                                         </div>
                                     @else
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="menu_status" value="1">
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="menu_status" class="polaris" value="1">
                                             <label class="cursor-pointer">Yes</label>
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-sm-12">
-                                            <input type="radio" name="menu_status" value="0" checked>
+                                        <div class="col-xl-1 col-md-2 col-sm-12">
+                                            <input type="radio" name="menu_status" class="polaris" value="0" checked>
                                             <label class="cursor-pointer">No</label>
                                         </div>
                                     @endif

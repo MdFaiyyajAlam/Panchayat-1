@@ -45,7 +45,7 @@ class CategoryController extends Controller
         ]);
         $save = Category::create([
             'name' => strtolower($request->input('name')),
-            'slug' => trim(strtolower($request->input('slug'))) ? trim(strtolower($request->input('slug'))) : strtolower($request->input('name')),
+            'slug' => trim(strtolower($request->input('slug'))),
             'description' => trim(strtolower($request->input('description'))),
             'keywords' => trim(strtolower($request->input('keywords'))),
             'color' => trim(strtolower($request->input('color'))),

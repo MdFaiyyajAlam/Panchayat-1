@@ -15,7 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return view('admin_dashboard.role.index', compact('roles'));
     }
 
     /**
@@ -25,7 +26,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin_dashboard.role.create');
     }
 
     /**
@@ -36,7 +37,19 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:roles,name',
+        ]);
+
+        $save = Role::create([
+            'name' => strtolower($request->input('name')),
+        ]);
+
+        if ($save) {
+            return redirect()->route('admin.role.view')->with('success', 'Role successfully created');
+        } else {
+            return redirect()->route('admin.role.view')->with('error', 'Role not created');
+        }
     }
 
     /**
@@ -58,7 +71,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view('admin_dashboard.role.edit', compact('role'));
     }
 
     /**
@@ -70,7 +83,17 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:roles,name,' . $role->id,
+        ]);
+
+        $role->name = strtolower($request->input('name'));
+
+        if ($role->save()) {
+            return redirect()->route('admin.role.view')->with('success', 'Role successfully updated');
+        } else {
+            return redirect()->route('admin.role.view')->with('error', 'Role not updated');
+        }
     }
 
     /**

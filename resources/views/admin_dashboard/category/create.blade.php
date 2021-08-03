@@ -26,7 +26,7 @@
                             {{-- name --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">Category Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Category Name" required>
+                                <input type="text" name="name" class="form-control" onkeyup="createSlug(this)" placeholder="Category Name" required>
                             </div>
                             {{-- slug --}}
                             <div class="col-12 mt-3">
@@ -35,7 +35,7 @@
                                         (If you leave it blank, it will be generated automatically.)
                                     </small>
                                 </label>
-                                <input type="text" class="form-control" name="slug" placeholder="Slug">
+                                <input type="text" class="form-control" data-slug="slug" name="slug" placeholder="Slug">
                             </div>
                             {{-- description --}}
                             <div class="col-12 mt-3">
@@ -54,9 +54,9 @@
                             {{-- color --}}
                             <div class="col-12 mt-3">
                                 <label class="form-label">Color</label>
-                                <div class="input-group colorpicker position-relative">
-                                    <input type="text" name="color" class="form-control" maxlength="200" placeholder="Color" required>
-                                    <span class="input-group-text input-group-addon"><i></i></span>
+                                <div class="input-group">
+                                    <input type="text" id="color" name="color" class="form-control" maxlength="200" placeholder="Color" disabled required>
+                                    <span class="colorpicker"></span>
                                 </div>
                             </div>
                             {{-- menu order --}}
@@ -67,15 +67,15 @@
                             {{-- show on menu --}}
                             <div class="col-12 mt-3">
                                 <div class="row g-sm-2">
-                                    <div class="col-md-4 col-sm-12">
+                                    <div class="col-xl-2 col-md-3 col-sm-12">
                                         <label class="fw-bold">Show on Menu</label>
                                     </div>
-                                    <div class="col-lg-2 col-md-4 col-sm-12">
-                                        <input type="radio" name="menu_status" value="1" checked>
+                                    <div class="col-xl-1 col-md-2 col-sm-12">
+                                        <input type="radio" name="menu_status" value="1" class="polaris" checked>
                                         <label class="cursor-pointer">Yes</label>
                                     </div>
-                                    <div class="col-lg-2 col-md-4 col-sm-12">
-                                        <input type="radio" name="menu_status" value="0">
+                                    <div class="col-xl-1 col-md-2 col-sm-12">
+                                        <input type="radio" name="menu_status" class="polaris" value="0">
                                         <label class="cursor-pointer">No</label>
                                     </div>
                                 </div>
@@ -83,15 +83,15 @@
                             {{-- show on homepage --}}
                             <div class="col-12 mt-3">
                                 <div class="row g-sm-2">
-                                    <div class="col-md-4 col-sm-12">
+                                    <div class="col-xl-2 col-md-3 col-sm-12">
                                         <label class="fw-bold">Show on Homepage</label>
                                     </div>
-                                    <div class="col-lg-2 col-md-4 col-sm-12">
-                                        <input type="radio" name="home_status" value="1" checked>
+                                    <div class="col-xl-1 col-md-2 col-sm-12">
+                                        <input type="radio" name="home_status" value="1" class="polaris" checked>
                                         <label class="cursor-pointer">Yes</label>
                                     </div>
-                                    <div class="col-lg-2 col-md-4 col-sm-12">
-                                        <input type="radio" name="home_status" value="0">
+                                    <div class="col-xl-1 col-md-2 col-sm-12">
+                                        <input type="radio" name="home_status" class="polaris" value="0">
                                         <label class="cursor-pointer">No</label>
                                     </div>
                                 </div>
@@ -102,31 +102,31 @@
                                 <div class="row row-cols-sm-4 row-cols-md-5 row-cols-xl-4 g-sm-2 align-items-start mt-3">
                                     <div class="col d-flex flex-column">
                                         <div class="text-center mb-3">
-                                            <input type="radio" name="block_type" value="block-1" checked>
+                                            <input type="radio" name="block_type" value="block-1" class="polaris" checked>
                                         </div>
                                         <img src="https://biharyojna.com/assets/admin/img/block-1.png" alt="block-1" class="img-fluid img-thumbnail">
                                     </div>
                                     <div class="col d-flex flex-column">
                                         <div class="text-center mb-3">
-                                            <input type="radio" name="block_type" value="block-2">
+                                            <input type="radio" name="block_type" class="polaris" value="block-2">
                                         </div>
                                         <img src="https://biharyojna.com/assets/admin/img/block-2.png" alt="block-2" class="img-fluid img-thumbnail">
                                     </div>
                                     <div class="col d-flex flex-column justify-content-center">
                                         <div class="text-center mb-3">
-                                            <input type="radio" name="block_type" value="block-3">
+                                            <input type="radio" name="block_type" class="polaris" value="block-3">
                                         </div>
                                         <img src="https://biharyojna.com/assets/admin/img/block-3.png" alt="block-3" class="img-fluid img-thumbnail">
                                     </div>
                                     <div class="col d-flex flex-column">
                                         <div class="text-center mb-3">
-                                            <input type="radio" name="block_type" value="block-4">
+                                            <input type="radio" name="block_type" class="polaris" value="block-4">
                                         </div>
                                         <img src="https://biharyojna.com/assets/admin/img/block-4.png" alt="block-4" class="img-fluid img-thumbnail">
                                     </div>
                                     <div class="col d-flex flex-column">
                                         <div class="text-center mb-3">
-                                            <input type="radio" name="block_type" value="block-5">
+                                            <input type="radio" name="block_type" class="polaris" value="block-5">
                                         </div>
                                         <img src="https://biharyojna.com/assets/admin/img/block-5.png" alt="block-5" class="img-fluid img-thumbnail">
                                     </div>

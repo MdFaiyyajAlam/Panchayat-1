@@ -1,3 +1,10 @@
+// create slug
+function createSlug(e) {
+    var str = e.value;
+    str = str.replace(/\W+(?!$)/g, '-').toLowerCase();//rplace stapces with dash
+    document.querySelector('input[data-slug="slug"]').value = str;
+}
+
 // //update token
 // $("form").submit(function () {
 //     $("input[name='" + csfr_token_name + "']").val($.cookie(csfr_cookie_name));

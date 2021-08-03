@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -18,6 +21,24 @@ class AdminController extends Controller
         return view('admin_dashboard.dashboard');
     }
 
+    public function admin()
+    {
+        $admins = Admin::with(['role', 'adminProfile'])->where('role_id', 1)->get();
+        return view('admin_dashboard.user.administrator', compact('admins'));
+    }
+
+    public function staff()
+    {
+        $admins = Admin::with(['role', 'adminProfile'])->where('role_id', '!=', 1)->get();
+        return view('admin_dashboard.user.staff', compact('admins'));
+    }
+
+    public function user()
+    {
+        $users = User::with(['role', 'userProfile'])->get();
+        return view('admin_dashboard.user.user', compact('users'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +46,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::where('id', '!=', 1)->where('id', '!=', 2)->get();
+        return view('admin_dashboard.user.create-staff', compact('roles'));
     }
 
     /**
@@ -36,7 +58,26 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'role_id' => 'required',
+        ]);
+
+        $save = Admin::create([
+            'name' => strtolower($request->input('name')),
+            'email' => strtolower($request->input('email')),
+            'password' => Hash::make(123),
+            'role_id' => strtolower($request->input('role_id')),
+        ]);
+
+        if ($save) {
+            return redirect()->route('admin.staff.view')->with('success', 'Staff successfully created');
+        } else {
+            return redirect()->route('admin.staff.view')->with('error', 'Staff not created');
+        }
+        
     }
 
     /**
