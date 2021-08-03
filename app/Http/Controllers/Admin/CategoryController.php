@@ -40,7 +40,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'color' => 'required',
+            // 'color' => 'required',
             'slug' => 'unique:categories,slug,',
         ]);
         $save = Category::create([
@@ -58,7 +58,7 @@ class CategoryController extends Controller
             $navigation->menu_status = $request->input('menu_status');
             $navigation->home_status = $request->input('home_status');
             $navigation->block_type = trim(strtolower($request->input('block_type')));
-            
+
             if ($navigation->save()) {
                 return redirect()->route('admin.category.view')->with('success', 'Category successfully created');
             } else {
@@ -101,15 +101,15 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
             'color' => 'required',
-            'slug' => 'required|unique:categories,slug,'.$category->id, 
+            'slug' => 'required|unique:categories,slug,'.$category->id,
         ]);
-        
+
         $category->name = strtolower($request->input('name'));
         $category->slug = trim(strtolower($request->input('slug')));
         $category->description = trim(strtolower($request->input('description')));
         $category->keywords = trim(strtolower($request->input('keywords')));
         $category->color = trim(strtolower($request->input('color')));
-        
+
         if ($category->save()) {
             $navigation = Navigation::where('category_id', $category->id)->first();
             $navigation->link = $category->slug;
@@ -117,7 +117,7 @@ class CategoryController extends Controller
             $navigation->menu_status = $request->input('menu_status');
             $navigation->home_status = $request->input('home_status');
             $navigation->block_type = trim(strtolower($request->input('block_type')));
-            
+
             $save = $navigation->save();
             if ($save) {
                 return redirect()->route('admin.category.view')->with('success', 'Category successfully updated');
@@ -139,9 +139,9 @@ class CategoryController extends Controller
         if ($deleted) {
             $category->navigation()->delete();
             $category->child()->delete();
-            
+
             return redirect()->route('admin.category.view')->with('success', 'Category successfully deleted');
-            
+
         } else {
             return redirect()->route('admin.category.view')->with('error', 'Category not deleted');
         }
