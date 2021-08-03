@@ -40,7 +40,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            // 'color' => 'required',
+            'color' => 'required',
             'slug' => 'unique:categories,slug,',
         ]);
         $save = Category::create([
