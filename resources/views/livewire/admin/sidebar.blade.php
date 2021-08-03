@@ -195,6 +195,14 @@
                 </li>
             </ul>
         </li>
+        {{-- Roles & Permissions --}}
+        <li>
+            <a href="{{route('admin.role.view')}}">
+                <div class="parent-icon"><i class='bx bx-key'></i>
+                </div>
+                <div class="menu-title">Roles & Permissions</div>
+            </a>
+        </li>
         {{-- Users --}}
         <li>
             <a href="javascript:void(0);" class="has-arrow">
@@ -212,14 +220,6 @@
                 <li> <a href="{{route('admin.user.view')}}"><i class="bx bx-right-arrow-alt"></i>Users</a>
                 </li>
             </ul>
-        </li>
-        {{-- Roles & Permissions --}}
-        <li>
-            <a href="{{route('admin.role.view')}}">
-                <div class="parent-icon"><i class='bx bx-key'></i>
-                </div>
-                <div class="menu-title">Roles & Permissions</div>
-            </a>
         </li>
         {{-- SEO Tools --}}
         <li>

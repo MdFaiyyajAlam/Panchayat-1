@@ -748,11 +748,11 @@ $(document).on('change', '#Multifileupload', function () {
 
 $(document).ajaxStop(function () {
 
-    $('input[type="checkbox"].polaris, input[type="radio"].polaris').iCheck({
-        checkboxClass: 'icheckbox_polaris',
-        radioClass: 'iradio_polaris',
-        increaseArea: '20%' // optional
-    });
+    // $('input[type="checkbox"].polaris, input[type="radio"].polaris').iCheck({
+    //     checkboxClass: 'icheckbox_polaris',
+    //     radioClass: 'iradio_polaris',
+    //     increaseArea: '20%' // optional
+    // });
 
     // $('#cb_scheduled').on('ifChecked', function () {
     //     $("#date_published_content").show();
