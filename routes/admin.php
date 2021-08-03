@@ -26,6 +26,24 @@ Route::name('admin.')->middleware('guest:admin')->group(function () {
 Route::name('admin.')->middleware('auth:admin')->group(function(){
     // dashboard
     Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('dashboard');
+    // admin
+    Route::prefix('administrator')->name('administrator.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'admin'])->name('view');
+        Route::get('/edit/{admin}', [App\Http\Controllers\Admin\AdminController::class, 'edit'])->name('edit');
+        Route::post('/update/{admin}', [App\Http\Controllers\Admin\AdminController::class, 'update'])->name('update');
+    });
+    // staffs
+    Route::prefix('staff')->name('staff.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'staff'])->name('view');
+        Route::get('/create', [App\Http\Controllers\Admin\AdminController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Admin\AdminController::class, 'store'])->name('store');
+    });
+    // users
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'user'])->name('view');
+        Route::get('/create', [App\Http\Controllers\Admin\AdminController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Admin\AdminController::class, 'store'])->name('store');
+    });
     // navigation
     Route::prefix('navigation')->name('navigation.')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\NavigationController::class, 'index'])->name('view');
@@ -115,7 +133,7 @@ Route::name('admin.')->middleware('auth:admin')->group(function(){
         Route::get('/show/{widget}', [App\Http\Controllers\Admin\WidgetController::class, 'show'])->name('show');
         Route::get('/edit/{widget}', [App\Http\Controllers\Admin\WidgetController::class, 'edit'])->name('edit');
         Route::post('/update/{widget}', [App\Http\Controllers\Admin\WidgetController::class, 'update'])->name('update');
-        Route::post('/delete/{widget}', [App\Http\Controllers\Admin\WidgetController::class, 'delete'])->name('delete');
+        Route::get('/delete/{widget}', [App\Http\Controllers\Admin\WidgetController::class, 'destroy'])->name('delete');
         Route::get('/status/{status/{widget}', [App\Http\Controllers\Admin\WidgetController::class, 'status'])->name('status');
     });
     // poll
@@ -126,63 +144,89 @@ Route::name('admin.')->middleware('auth:admin')->group(function(){
         Route::get('/show/{poll}', [App\Http\Controllers\Admin\PollController::class, 'show'])->name('show');
         Route::get('/edit/{poll}', [App\Http\Controllers\Admin\PollController::class, 'edit'])->name('edit');
         Route::post('/update/{poll}', [App\Http\Controllers\Admin\PollController::class, 'update'])->name('update');
-        Route::post('/delete/{poll}', [App\Http\Controllers\Admin\PollController::class, 'delete'])->name('delete');
+        Route::get('/delete/{poll}', [App\Http\Controllers\Admin\PollController::class, 'destroy'])->name('delete');
         Route::get('/status/{status/{poll}', [App\Http\Controllers\Admin\PollController::class, 'status'])->name('status');
     });
     // gallery
     Route::prefix('gallery')->name('gallery.')->group(function () {
-        Route::get('/', [App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('view');
-        Route::get('/create', [App\Http\Controllers\Admin\GalleryController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Admin\GalleryController::class, 'store'])->name('store');
-        Route::get('/show/{gallery}', [App\Http\Controllers\Admin\GalleryController::class, 'show'])->name('show');
-        Route::get('/edit/{gallery}', [App\Http\Controllers\Admin\GalleryController::class, 'edit'])->name('edit');
-        Route::post('/update/{gallery}', [App\Http\Controllers\Admin\GalleryController::class, 'update'])->name('update');
-        Route::post('/delete/{gallery}', [App\Http\Controllers\Admin\GalleryController::class, 'delete'])->name('delete');
-        Route::get('/status/{status/{gallery}', [App\Http\Controllers\Admin\GalleryController::class, 'status'])->name('status');
+        // album
+        Route::prefix('album')->name('album.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\GalleryAlbumController::class, 'index'])->name('view');
+            Route::get('/create', [App\Http\Controllers\Admin\GalleryAlbumController::class, 'create'])->name('create');
+            Route::post('/store', [App\Http\Controllers\Admin\GalleryAlbumController::class, 'store'])->name('store');
+            Route::get('/show/{galleryAlbum}', [App\Http\Controllers\Admin\GalleryAlbumController::class, 'show'])->name('show');
+            Route::get('/edit/{galleryAlbum}', [App\Http\Controllers\Admin\GalleryAlbumController::class, 'edit'])->name('edit');
+            Route::post('/update/{galleryAlbum}', [App\Http\Controllers\Admin\GalleryAlbumController::class, 'update'])->name('update');
+            Route::get('/delete/{galleryAlbum}', [App\Http\Controllers\Admin\GalleryAlbumController::class, 'destroy'])->name('delete');
+            Route::get('/status/{status/{galleryAlbum}', [App\Http\Controllers\Admin\GalleryAlbumController::class, 'status'])->name('status');
+        });
+        // category
+        Route::prefix('category')->name('category.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\GalleryCategoryController::class, 'index'])->name('view');
+            Route::get('/create', [App\Http\Controllers\Admin\GalleryCategoryController::class, 'create'])->name('create');
+            Route::post('/store', [App\Http\Controllers\Admin\GalleryCategoryController::class, 'store'])->name('store');
+            Route::get('/show/{galleryCategory}', [App\Http\Controllers\Admin\GalleryCategoryController::class, 'show'])->name('show');
+            Route::get('/edit/{galleryCategory}', [App\Http\Controllers\Admin\GalleryCategoryController::class, 'edit'])->name('edit');
+            Route::post('/update/{galleryCategory}', [App\Http\Controllers\Admin\GalleryCategoryController::class, 'update'])->name('update');
+            Route::get('/delete/{galleryCategory}', [App\Http\Controllers\Admin\GalleryCategoryController::class, 'destroy'])->name('delete');
+            Route::get('/status/{status/{galleryCategory}', [App\Http\Controllers\Admin\GalleryCategoryController::class, 'status'])->name('status');
+        });
+        // image
+        Route::prefix('image')->name('image.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\GalleryImageController::class, 'index'])->name('view');
+            Route::get('/create', [App\Http\Controllers\Admin\GalleryImageController::class, 'create'])->name('create');
+            Route::post('/store', [App\Http\Controllers\Admin\GalleryImageController::class, 'store'])->name('store');
+            Route::get('/show/{galleryImage}', [App\Http\Controllers\Admin\GalleryImageController::class, 'show'])->name('show');
+            Route::get('/edit/{galleryImage}', [App\Http\Controllers\Admin\GalleryImageController::class, 'edit'])->name('edit');
+            Route::post('/update/{galleryImage}', [App\Http\Controllers\Admin\GalleryImageController::class, 'update'])->name('update');
+            Route::post('/getCategory', [App\Http\Controllers\Admin\GalleryImageController::class, 'getCategory'])->name('getCategory');
+            Route::get('/delete/{galleryImage}', [App\Http\Controllers\Admin\GalleryImageController::class, 'destroy'])->name('delete');
+            Route::get('/status/{status/{galleryImage}', [App\Http\Controllers\Admin\GalleryImageController::class, 'status'])->name('status');
+        });
+
     });
     // contact-message
     Route::prefix('contact-message')->name('contactMessage.')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\ContactMessageController::class, 'index'])->name('view');
-        Route::get('/create', [App\Http\Controllers\Admin\ContactMessageController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Admin\ContactMessageController::class, 'store'])->name('store');
-        Route::get('/show/{contactMessage}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show'])->name('show');
-        Route::get('/edit/{contactMessage}', [App\Http\Controllers\Admin\ContactMessageController::class, 'edit'])->name('edit');
-        Route::post('/update/{contactMessage}', [App\Http\Controllers\Admin\ContactMessageController::class, 'update'])->name('update');
-        Route::post('/delete/{contactMessage}', [App\Http\Controllers\Admin\ContactMessageController::class, 'delete'])->name('delete');
-        Route::get('/status/{status/{contactMessage}', [App\Http\Controllers\Admin\ContactMessageController::class, 'status'])->name('status');
+        Route::post('/delete/{contactMessage}', [App\Http\Controllers\Admin\ContactMessageController::class, 'destroy'])->name('delete');
     });
     // comment
     Route::prefix('comment')->name('comment.')->group(function () {
-        Route::get('/', [App\Http\Controllers\Admin\CommentController::class, 'index'])->name('view');
-        Route::get('/create', [App\Http\Controllers\Admin\CommentController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Admin\CommentController::class, 'store'])->name('store');
-        Route::get('/show/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'show'])->name('show');
+        Route::get('/pending', [App\Http\Controllers\Admin\CommentController::class, 'pending'])->name('pending');
+        Route::get('/approved', [App\Http\Controllers\Admin\CommentController::class, 'approved'])->name('approved');
         Route::get('/edit/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'edit'])->name('edit');
         Route::post('/update/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'update'])->name('update');
-        Route::post('/delete/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'delete'])->name('delete');
-        Route::get('/status/{status/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'status'])->name('status');
+        Route::get('/delete-pending/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'destroyPending'])->name('deletePending');
+        Route::get('/delete-approved/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'destroyApproved'])->name('deleteApproved');
     });
     // newsletter
     Route::prefix('newsletter')->name('newsletter.')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\NewsletterController::class, 'index'])->name('view');
         Route::get('/create', [App\Http\Controllers\Admin\NewsletterController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Admin\CommentController::class, 'store'])->name('store');
+        Route::post('/store', [App\Http\Controllers\Admin\NewsletterController::class, 'store'])->name('store');
         Route::get('/show/{newsletter}', [App\Http\Controllers\Admin\NewsletterController::class, 'show'])->name('show');
         Route::get('/edit/{newsletter}', [App\Http\Controllers\Admin\NewsletterController::class, 'edit'])->name('edit');
         Route::post('/update/{newsletter}', [App\Http\Controllers\Admin\NewsletterController::class, 'update'])->name('update');
-        Route::post('/delete/{newsletter}', [App\Http\Controllers\Admin\NewsletterController::class, 'delete'])->name('delete');
-        Route::get('/status/{status/{newsletter}', [App\Http\Controllers\Admin\NewsletterController::class, 'status'])->name('status');
+        Route::get('/delete/{newsletter}', [App\Http\Controllers\Admin\NewsletterController::class, 'destroy'])->name('delete');
+
+        // newsletter subscriber
+        Route::prefix('subscriber')->name('subscriber.')->group(function() {
+            Route::get('/', [App\Http\Controllers\Admin\NewsletterSubscriberController::class, 'index'])->name('view');
+            Route::get('/send-newsletter/{newsletter}', [App\Http\Controllers\Admin\NewsletterSubscriberController::class, 'sendNewsletter'])->name('sendNewsletter');
+            Route::post('/send', [App\Http\Controllers\Admin\NewsletterSubscriberController::class, 'send'])->name('send');
+            Route::get('/delete/{newsletterSubscriber}', [App\Http\Controllers\Admin\NewsletterSubscriberController::class, 'destroy'])->name('delete');
+        });
     });
-    // role-permission
-    Route::prefix('roles-permissions')->name('rolePermission.')->group(function () {
-        Route::get('/', [App\Http\Controllers\Admin\CommentController::class, 'index'])->name('view');
-        Route::get('/create', [App\Http\Controllers\Admin\CommentController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Admin\CommentController::class, 'store'])->name('store');
-        Route::get('/show/{rolePermission}', [App\Http\Controllers\Admin\CommentController::class, 'show'])->name('show');
-        Route::get('/edit/{rolePermission}', [App\Http\Controllers\Admin\CommentController::class, 'edit'])->name('edit');
-        Route::post('/update/{rolePermission}', [App\Http\Controllers\Admin\CommentController::class, 'update'])->name('update');
-        Route::post('/delete/{rolePermission}', [App\Http\Controllers\Admin\CommentController::class, 'delete'])->name('delete');
-        Route::get('/status/{status/{rolePermission}', [App\Http\Controllers\Admin\CommentController::class, 'status'])->name('status');
+    // role
+    Route::prefix('roles')->name('role.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\RoleController::class, 'index'])->name('view');
+        Route::get('/create', [App\Http\Controllers\Admin\RoleController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Admin\RoleController::class, 'store'])->name('store');
+        Route::get('/show/{role}', [App\Http\Controllers\Admin\RoleController::class, 'show'])->name('show');
+        Route::get('/edit/{role}', [App\Http\Controllers\Admin\RoleController::class, 'edit'])->name('edit');
+        Route::post('/update/{role}', [App\Http\Controllers\Admin\RoleController::class, 'update'])->name('update');
+        Route::post('/delete/{role}', [App\Http\Controllers\Admin\RoleController::class, 'destroy'])->name('delete');
+        Route::get('/status/{status/{role}', [App\Http\Controllers\Admin\RoleController::class, 'status'])->name('status');
     });
 
 
