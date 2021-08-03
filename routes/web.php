@@ -6,6 +6,8 @@ use App\Http\Controllers\Home\StoriesController;
 use App\Http\Controllers\Home\GalleryController;
 use App\Http\Controllers\Home\DonateController;
 use App\Http\Controllers\Home\AboutController;
+use App\Http\Controllers\Home\CategoryController;
+use App\Http\Controllers\Home\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,8 @@ use App\Http\Controllers\Home\AboutController;
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/stories',[StoriesController::class,'stories'])->name('stories');
 Route::get('/gallery',[GalleryController::class,'gallery'])->name('gallery');
+Route::get('/categories',[CategoryController::class,'categories'])->name('categories');
+Route::get('/view',[ViewController::class,'view'])->name('view');
 
 Route::get('/donate',[DonateController::class,'donate'])->name('donate');
 Route::get('/about',[AboutController::class,'about'])->name('about');
