@@ -23,4 +23,9 @@ class Navigation extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
+    public function cat()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
 }

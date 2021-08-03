@@ -29,7 +29,8 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        return view('admin_dashboard.subcategory.create');
+        $data['categories'] = Category::all();
+        return view('admin_dashboard.subcategory.create',$data);
     }
 
     /**
@@ -104,7 +105,7 @@ class SubcategoryController extends Controller
         $subcategory->keywords = trim(strtolower($request->input('keywords')));
         $subcategory->category_id = $request->input('parent_id');
         $subcategory->menu_status = $request->input('menu_status');
-            
+
         if ($subcategory->save()) {
             return redirect()->route('admin.subcategory.view')->with('success', 'Subcategory successfully updated');
         } else {
