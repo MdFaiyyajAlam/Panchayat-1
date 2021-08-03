@@ -55,7 +55,11 @@
                             <div class="col-12 mt-3">
                                 <label class="form-label">Color</label>
                                 <div class="input-group">
+<<<<<<< HEAD
+                                    <input type="text" id="color" name="color" class="form-control" maxlength="200" placeholder="Color" disabled >
+=======
                                     <input type="text" id="color" name="color" class="form-control" maxlength="200" placeholder="Color" required>
+>>>>>>> 7949aa181e16c1957d119f80da0b39cc140d8538
                                     <span class="colorpicker"></span>
                                 </div>
                             </div>

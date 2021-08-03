@@ -35,11 +35,11 @@
                         <a class="nav-link  @if ($n->category->child->count() > 0) dropdown-toggle
 
                         @endif" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{$n->category->name}}
+                            {{ucfirst($n->category->name)}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                        @foreach ($n->category->child as $sub)
-                        <li><a class="dropdown-item" href="">{{$sub->name}}</a></li>
+                        <li><a class="dropdown-item" href="">{{ucfirst($sub->name)}}</a></li>
 
                         @endforeach
                     </ul>
