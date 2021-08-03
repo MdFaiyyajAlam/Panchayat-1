@@ -37,7 +37,7 @@
                         @endforeach
                         {{-- other navigation --}}
                         <div id="accordion">
-                            @foreach ($navigations->where('title', '!=', 'home')->where('parent_id', '==', null) as $list)
+                            @foreach ($navigations->where('title', '!=', 'home') as $list)
                             <div class="card">
                                 {{-- category --}}
                                 <div class="card-header bg-gradient-moonlit">

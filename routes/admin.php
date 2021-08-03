@@ -32,17 +32,25 @@ Route::name('admin.')->middleware('auth:admin')->group(function(){
         Route::get('/edit/{admin}', [App\Http\Controllers\Admin\AdminController::class, 'edit'])->name('edit');
         Route::post('/update/{admin}', [App\Http\Controllers\Admin\AdminController::class, 'update'])->name('update');
     });
+    // profile
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\AdminProfileController::class, 'index'])->name('view');
+        Route::get('/edit/{admin}', [App\Http\Controllers\Admin\AdminController::class, 'edit'])->name('edit');
+        Route::post('/update/{admin}', [App\Http\Controllers\Admin\AdminController::class, 'update'])->name('update');
+    });
     // staffs
     Route::prefix('staff')->name('staff.')->group(function () {
-        Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'staff'])->name('view');
-        Route::get('/create', [App\Http\Controllers\Admin\AdminController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Admin\AdminController::class, 'store'])->name('store');
+        Route::get('/', [App\Http\Controllers\Admin\StaffController::class, 'index'])->name('view');
+        Route::get('/create', [App\Http\Controllers\Admin\StaffController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Admin\StaffController::class, 'store'])->name('store');
+        Route::get('/edit/{admin}', [App\Http\Controllers\Admin\StaffController::class, 'edit'])->name('edit');
+        Route::post('/update/{admin}', [App\Http\Controllers\Admin\StaffController::class, 'update'])->name('update');
+        Route::get('/delete/{admin}', [App\Http\Controllers\Admin\StaffController::class, 'destroy'])->name('delete');
     });
     // users
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'user'])->name('view');
-        Route::get('/create', [App\Http\Controllers\Admin\AdminController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Admin\AdminController::class, 'store'])->name('store');
+        Route::get('/user-delete/{user}', [App\Http\Controllers\Admin\AdminController::class, 'deleteUser'])->name('deleteUser');
     });
     // navigation
     Route::prefix('navigation')->name('navigation.')->group(function () {

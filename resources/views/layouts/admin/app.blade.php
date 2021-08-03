@@ -205,7 +205,6 @@
             // Change Input value
             pickr.on('change', (color, instance) => {
                 document.querySelector('#color').value = color.toHEXA().toString();
-                instance.applyColor();
             });
                         
         </script>

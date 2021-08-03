@@ -343,11 +343,11 @@
                     <img src="{{ Auth::user()->profile_photo_path ? asset('storage/'.Auth::user()->profile_photo_path) : Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" class="user-img">
                     <div class="user-info ps-3">
                         <p class="user-name mb-0">{{ucfirst(Auth::user()->name)}}</p>
-                        <p class="designattion mb-0">Web Designer</p>
+                        <p class="designattion mb-0">{{ucfirst(Auth::user()->role->name)}}</p>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
+                    <li><a class="dropdown-item" href="{{route('admin.profile.view')}}"><i class="bx bx-user"></i><span>Profile</span></a>
                     </li>
                     <li><a class="dropdown-item" href="javascript:;"><i class="bx bx-cog"></i><span>Settings</span></a>
                     </li>
