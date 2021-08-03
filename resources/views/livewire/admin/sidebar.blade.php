@@ -52,44 +52,16 @@
             </a>
             <ul>
                 <li>
-                    <a href="javascript:void(0);">
+                    <a href="{{ route('admin.category.view') }}">
                         <div class=""><i class="bx bx-right-arrow-alt"></i></div>
                         <div class="">Categories</div>
                     </a>
-                    <ul>
-                        <li>
-                            <a href="{{ route('admin.category.view') }}">
-                                <i class="bx bx-right-arrow-alt"></i>
-                                Categories List
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.category.create')}}">
-                                <i class="bx bx-right-arrow-alt"></i>
-                                Add Category
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li>
-                    <a href="javascript:void(0);">
+                    <a href="{{ route('admin.subcategory.view') }}">
                         <i class="bx bx-right-arrow-alt"></i>
                         Subcategories
                     </a>
-                    <ul>
-                        <li>
-                            <a href="{{ route('admin.subcategory.view') }}">
-                                <i class="bx bx-right-arrow-alt"></i>
-                                Subcategories List
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.subcategory.create')}}">
-                                <i class="bx bx-right-arrow-alt"></i>
-                                Add Subcategory
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </li>
@@ -151,9 +123,9 @@
                 <div class="menu-title">Widget</div>
             </a>
             <ul>
-                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Add Widget</a>
+                <li> <a href="{{route('admin.widget.create')}}"><i class="bx bx-right-arrow-alt"></i>Add Widget</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Widgets</a>
+                <li> <a href="{{route('admin.widget.view')}}"><i class="bx bx-right-arrow-alt"></i>Widgets</a>
                 </li>
             </ul>
         </li>
@@ -165,9 +137,9 @@
                 <div class="menu-title">Polls</div>
             </a>
             <ul>
-                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Add Poll</a>
+                <li> <a href="{{route('admin.poll.create')}}"><i class="bx bx-right-arrow-alt"></i>Add Poll</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Polls</a>
+                <li> <a href="{{route('admin.poll.view')}}"><i class="bx bx-right-arrow-alt"></i>Polls</a>
                 </li>
             </ul>
         </li>
@@ -179,15 +151,17 @@
                 <div class="menu-title">Gallery</div>
             </a>
             <ul>
-                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Add Gallery</a>
+                <li> <a href="{{route('admin.gallery.album.view')}}"><i class="bx bx-right-arrow-alt"></i>Album</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Images</a>
+                <li> <a href="{{route('admin.gallery.category.view')}}"><i class="bx bx-right-arrow-alt"></i>Category</a>
+                </li>
+                <li> <a href="{{route('admin.gallery.image.view')}}"><i class="bx bx-right-arrow-alt"></i>Images</a>
                 </li>
             </ul>
         </li>
         {{-- Contact Messages --}}
         <li>
-            <a href="#">
+            <a href="{{route('admin.contactMessage.view')}}">
                 <div class="parent-icon"><i class='bx bxl-telegram'></i>
                 </div>
                 <div class="menu-title">Contact Messages</div>
@@ -201,9 +175,9 @@
                 <div class="menu-title">Comments</div>
             </a>
             <ul>
-                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Pending Comments</a>
+                <li> <a href="{{route('admin.comment.pending')}}"><i class="bx bx-right-arrow-alt"></i>Pending Comments</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Approved Comments</a>
+                <li> <a href="{{route('admin.comment.approved')}}"><i class="bx bx-right-arrow-alt"></i>Approved Comments</a>
                 </li>
             </ul>
         </li>
@@ -215,9 +189,9 @@
                 <div class="menu-title">Newsletter</div>
             </a>
             <ul>
-                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Send Email to Subscribers</a>
+                <li> <a href="{{route('admin.newsletter.view')}}"><i class="bx bx-right-arrow-alt"></i>Newsletters</a>
+                <li> <a href="{{route('admin.newsletter.subscriber.view')}}"><i class="bx bx-right-arrow-alt"></i>Subscribers</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Subscribers</a>
                 </li>
             </ul>
         </li>
@@ -229,17 +203,19 @@
                 <div class="menu-title">Users</div>
             </a>
             <ul>
-                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Add Users</a>
+                <li> <a href="{{route('admin.staff.create')}}"><i class="bx bx-right-arrow-alt"></i>Add Staff</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Administrators</a>
+                <li> <a href="{{route('admin.administrator.view')}}"><i class="bx bx-right-arrow-alt"></i>Administrator</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Users</a>
+                <li> <a href="{{route('admin.staff.view')}}"><i class="bx bx-right-arrow-alt"></i>Staffs</a>
+                </li>
+                <li> <a href="{{route('admin.user.view')}}"><i class="bx bx-right-arrow-alt"></i>Users</a>
                 </li>
             </ul>
         </li>
         {{-- Roles & Permissions --}}
         <li>
-            <a href="#">
+            <a href="{{route('admin.role.view')}}">
                 <div class="parent-icon"><i class='bx bx-key'></i>
                 </div>
                 <div class="menu-title">Roles & Permissions</div>

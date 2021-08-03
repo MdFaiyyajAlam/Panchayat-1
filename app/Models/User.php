@@ -27,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'status',
     ];
 
     /**
@@ -62,5 +64,25 @@ class User extends Authenticatable
     function userProfile()
     {
         return $this->hasOne(UserProfile::class, 'user_id', 'id');
+    }
+
+    function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    public function message()
+    {
+        return $this->hasMany(ContactMessage::class, 'user_id', 'id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id', 'id');
+    }
+
+    public function newsletter()
+    {
+        return $this->hasOne(NewsletterSubscriber::class, 'user_id', 'id');
     }
 }

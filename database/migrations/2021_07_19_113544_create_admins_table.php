@@ -21,7 +21,8 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->string('profile_photo_path', 2048)->nullable();
             $table->rememberToken();
-            $table->foreignId('role_id')->nullable()->default(1);
+            $table->integer('role_id')->nullable()->default(1);
+            $table->integer('status')->nullable()->default(1);
             $table->timestamps();
         });
     }
