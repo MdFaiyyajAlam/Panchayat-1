@@ -1,32 +1,3 @@
-// create slug
-function createSlug(e) {
-    var str = e.value;
-    str = str.replace(/\W+(?!$)/g, '-').toLowerCase();//rplace stapces with dash
-    document.querySelector('input[data-slug="slug"]').value = str;
-}
-
-// //update token
-// $("form").submit(function () {
-//     $("input[name='" + csfr_token_name + "']").val($.cookie(csfr_cookie_name));
-// });
-
-// //datatable
-// $(document).ready(function () {
-//     $('#cs_datatable').DataTable({
-//         "order": [[0, "desc"]],
-//         "aLengthMenu": [[15, 30, 60, 100], [15, 30, 60, 100, "All"]]
-//     });
-// });
-
-// $(function () {
-//     $('#tags_1').tagsInput({width: 'auto'});
-// });
-
-// $('input[type="checkbox"].polaris, input[type="radio"].polaris').iCheck({
-//     checkboxClass: 'icheckbox_polaris',
-//     radioClass: 'iradio_polaris',
-//     increaseArea: '20%' // optional
-// });
 
 // get subcategory
 function get_sub_categories(val) {
@@ -107,83 +78,6 @@ $("#video_embed_code").on("input change keyup paste", function () {
 });
 
 
-function get_video_from_url() {
-    var url = $("#video_url").val();
-    if (url) {
-        var data = {
-            "url": url,
-        };
-        data[csfr_token_name] = $.cookie(csfr_cookie_name);
-        $.ajax({
-            type: "POST",
-            url: base_url + "post_controller/get_video_from_url",
-            data: data,
-            success: function (response) {
-                var obj = JSON.parse(response);
-                if (obj.video_embed_code) {
-                    $("#video_embed_code").val(obj.video_embed_code);
-                    $("#video_embed_preview").attr('src', obj.video_embed_code);
-                    $("#video_embed_preview").show();
-                }
-                if (obj.video_thumbnail) {
-                    $("#video_thumbnail_url").val(obj.video_thumbnail);
-                    var image = '<div class="post-select-image-container">' +
-                        '<img src="' + obj.video_thumbnail + '" alt="">' +
-                        '<a id="btn_delete_post_main_image" class="btn btn-danger btn-sm btn-delete-selected-file-image">' +
-                        '<i class="fa fa-times"></i> ' +
-                        '</a>' +
-                        '</div>';
-                    document.getElementById("post_select_image_container").innerHTML = image;
-                }
-            }
-        });
-    }
-}
-
-$("#video_thumbnail_url").on("input change keyup paste", function () {
-    var url = $("#video_thumbnail_url").val();
-    var image = '<div class="post-select-image-container">' +
-        '<img src="' + url + '" alt="">' +
-        '<a id="btn_delete_post_main_image" class="btn btn-danger btn-sm btn-delete-selected-file-image">' +
-        '<i class="fa fa-times"></i> ' +
-        '</a>' +
-        '</div>';
-    document.getElementById("post_select_image_container").innerHTML = image;
-    $('input[name="post_image_id"]').val('');
-});
-
-//reset file input
-function reset_file_input(id) {
-    $(id).val('');
-    $(id + "_label").html('');
-    $(id + "_button").hide();
-}
-
-//reset preview image
-function reset_preview_image(id) {
-    $(id).val('');
-    $(id + "_image").remove();
-    $(id + "_button").hide();
-}
-
-//delete post video
-function delete_post_video(post_id) {
-    var data = {
-        "post_id": post_id,
-    };
-    data[csfr_token_name] = $.cookie(csfr_cookie_name);
-    $.ajax({
-        type: "POST",
-        url: base_url + "post_controller/delete_post_video",
-        data: data,
-        success: function (response) {
-            document.getElementById("post_selected_video").innerHTML = " ";
-            $(".btn-delete-post-video").hide();
-        }
-    });
-}
-
-
 //check all checkboxes
 // $("#checkAll").click(function () {
 //     $('input:checkbox').not(this).prop('checked', this.checked);
@@ -200,36 +94,6 @@ $('.checkbox-table').on('ifChecked',function () {
 $('.checkbox-table').on('ifUnchecked',function () {
     $(".btn-table-delete").hide();
 });
-
-//delete selected posts
-function delete_selected_posts(message) {
-    swal({
-        text: message,
-        icon: "warning",
-        buttons: [sweetalert_cancel, sweetalert_ok],
-        dangerMode: true,
-    }).then(function (willDelete) {
-        if (willDelete) {
-            var post_ids = [];
-
-            $("input[name='checkbox-table']:checked").each(function () {
-                post_ids.push(this.value);
-            });
-            var data = {
-                'post_ids': post_ids,
-            };
-            data[csfr_token_name] = $.cookie(csfr_cookie_name);
-            $.ajax({
-                type: "POST",
-                url: base_url + "post_controller/delete_selected_posts",
-                data: data,
-                success: function (response) {
-                    location.reload();
-                }
-            });
-        }
-    });
-};
 
 //post bulk options
 function post_bulk_options(operation) {
@@ -396,28 +260,6 @@ $(document).on('click', '.btn-delete-additional-image-database', function () {
     });
 });
 
-//delete selected file
-$(document).on('click', '.btn-delete-selected-file', function () {
-    var item_id = $(this).attr("data-value");
-    $('#file_' + item_id).remove();
-});
-
-//delete selected file from database
-$(document).on('click', '.btn-delete-selected-file-database', function () {
-    var item_id = $(this).attr("data-value");
-    $('#post_selected_file_' + item_id).remove();
-    var data = {
-        "id": item_id
-    };
-    data[csfr_token_name] = $.cookie(csfr_cookie_name);
-    $.ajax({
-        type: "POST",
-        url: base_url + "post_controller/delete_post_file",
-        data: data,
-        success: function (response) {
-        }
-    });
-});
 
 //delete selected audio
 $(document).on('click', '.btn-delete-selected-audio', function () {
@@ -554,156 +396,6 @@ function get_albums_by_lang(val) {
     });
 }
 
-function get_categories_by_albums(val) {
-    var data = {
-        "category_id": val
-    };
-    data[csfr_token_name] = $.cookie(csfr_cookie_name);
-
-    $.ajax({
-        type: "POST",
-        url: base_url + "category_controller/gallery_categories_by_album",
-        data: data,
-        success: function (response) {
-            $('#categories').children('option:not(:first)').remove();
-            $("#categories").append(response);
-        }
-    });
-}
-
-function set_as_album_cover(val) {
-    var data = {
-        "image_id": val
-    };
-    data[csfr_token_name] = $.cookie(csfr_cookie_name);
-
-    $.ajax({
-        type: "POST",
-        url: base_url + "gallery_controller/set_as_album_cover",
-        data: data,
-        success: function (response) {
-            location.reload();
-        }
-    });
-}
-
-function delete_rss_feed_image(feed_id) {
-    var data = {
-        "feed_id": feed_id
-    };
-    data[csfr_token_name] = $.cookie(csfr_cookie_name);
-
-    $.ajax({
-        type: "POST",
-        url: base_url + "rss_controller/delete_feed_image",
-        data: data,
-        success: function (response) {
-            location.reload();
-        }
-    });
-}
-
-/*
-*-------------------------------------------------------------------------------------------------
-* Post Options Functions
-*-------------------------------------------------------------------------------------------------
-*/
-
-function select_post_item_image(file_id) {
-    var data = {
-        "file_id": file_id
-    };
-    data[csfr_token_name] = $.cookie(csfr_cookie_name);
-    $.ajax({
-        type: "POST",
-        url: base_url + "file_controller/select_image_file",
-        data: data,
-        success: function (response) {
-            var item_tab_id = $("#post_item_image_button_id").val();
-            $("#selected_image_file_" + item_tab_id).attr('src', response);
-            $("#selected_image_id_" + item_tab_id).val(file_id);
-        }
-    });
-}
-
-function set_gallery_item_box_collapsed(id) {
-    var data = {
-        "id": id
-    };
-    data[csfr_token_name] = $.cookie(csfr_cookie_name);
-    $.ajax({
-        type: "POST",
-        url: base_url + "post_controller/set_gallery_item_box_collapsed",
-        data: data,
-        success: function (response) {
-        }
-    });
-}
-
-function set_ordered_list_item_box_collapsed(id) {
-    var data = {
-        "id": id
-    };
-    data[csfr_token_name] = $.cookie(csfr_cookie_name);
-    $.ajax({
-        type: "POST",
-        url: base_url + "post_controller/set_ordered_list_item_box_collapsed",
-        data: data,
-        success: function (response) {
-        }
-    });
-}
-
-//delete gallery post item
-function delete_gallery_post_item(item_id, message) {
-    swal({
-        text: message,
-        icon: "warning",
-        buttons: [sweetalert_cancel, sweetalert_ok],
-        dangerMode: true,
-    }).then(function (willDelete) {
-        if (willDelete) {
-            var data = {
-                'item_id': item_id,
-            };
-            data[csfr_token_name] = $.cookie(csfr_cookie_name);
-            $.ajax({
-                type: "POST",
-                url: base_url + "post_controller/delete_gallery_post_item_post",
-                data: data,
-                success: function (response) {
-                    location.reload();
-                }
-            });
-        }
-    });
-};
-
-//delete ordered list item
-function delete_ordered_list_item(item_id, message) {
-    swal({
-        text: message,
-        icon: "warning",
-        buttons: [sweetalert_cancel, sweetalert_ok],
-        dangerMode: true,
-    }).then(function (willDelete) {
-        if (willDelete) {
-            var data = {
-                'item_id': item_id,
-            };
-            data[csfr_token_name] = $.cookie(csfr_cookie_name);
-            $.ajax({
-                type: "POST",
-                url: base_url + "post_controller/delete_ordered_list_item_post",
-                data: data,
-                success: function (response) {
-                    location.reload();
-                }
-            });
-        }
-    });
-};
-
 $('.price-input').keypress(function (event) {
     var $this = $(this);
     if ((event.which != 46 || $this.val().indexOf('.') != -1) &&
@@ -748,11 +440,11 @@ $(document).on('change', '#Multifileupload', function () {
 
 $(document).ajaxStop(function () {
 
-    // $('input[type="checkbox"].polaris, input[type="radio"].polaris').iCheck({
-    //     checkboxClass: 'icheckbox_polaris',
-    //     radioClass: 'iradio_polaris',
-    //     increaseArea: '20%' // optional
-    // });
+    $('input[type="checkbox"].polaris, input[type="radio"].polaris').iCheck({
+        checkboxClass: 'icheckbox_polaris',
+        radioClass: 'iradio_polaris',
+        increaseArea: '20%' // optional
+    });
 
     // $('#cb_scheduled').on('ifChecked', function () {
     //     $("#date_published_content").show();

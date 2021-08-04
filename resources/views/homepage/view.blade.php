@@ -9,12 +9,12 @@
                <div class="container-fluid">
                 <div class="data">
                     <div class="cat-date">
-                        <span class="cat-name">Lorem Ipsum Category Name here</span>
+                        <span class="cat-name">{{ucwords($post->category->name)}}</span>
                         <span class="mx-3">|</span>
-                        <span>September 15, 2021</span>
+                        <span>{{date('M d, Y', strtotime($post->created_at))}}</span>
                     </div>
                     <div class="title">
-                        <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h2>
+                        <h2>{{ucwords($post->title)}}</h2>
                     </div>
                     <div class="desc">
                         <p class="lead">
@@ -23,8 +23,8 @@
                     </div>
                     <div class="actions d-none d-lg-block">
                         <div class="action-content d-flex">
-                            <span class="fixed" style="width: 160px;">Mr. Author Ipsum</span>
-                        <span class="">
+                            <span class="fixed" style="width: 160px;">{{ucwords($post->author->name)}}</span>
+                        {{-- <span class="">
                             <div class="dropdown"> Language
                                 <button class="btn btn-secondary dropdown-toggle py-0 my-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                   English
@@ -34,8 +34,8 @@
                                   <li><a class="dropdown-item" href="#">Another action</a></li>
                                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
-                              </div>
-                        </span>
+                            </div>
+                        </span> --}}
                         <span>
                             Read Story in Pictures
                         </span>

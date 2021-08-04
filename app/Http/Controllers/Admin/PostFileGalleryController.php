@@ -16,18 +16,7 @@ class PostFileGalleryController extends Controller
      */
     public function index()
     {
-        $postFileGallery = PostFileGallery::all();
-        $url = asset('storage/media/files/post_file_gallery');
-        $file = '';
-        foreach ($postFileGallery as $value) {
-            $file .= '<div class="col-file-manager" id="file_col_id_'.$value->id.'">
-                        <div class="file-box" data-file-id="'.$value->id.'">
-                            
-                            <span class="file-name" data-file-name="'.$value->file.'">'.$value->file.'</span>
-                        </div>
-                    </div>';
-        }
-        return $file;
+        // 
     }
 
     /**
@@ -48,14 +37,7 @@ class PostFileGalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $files = $request->file('file');
-        // return $image->name; die;
-        $file = date('Y-m-d'). '-at-' . date('H-i-s') .'.'.$files->extension();
-        PostFileGallery::create([
-            'file' => $file,
-        ]);
-        $files->move(public_path('storage/media/files/post_file_gallery/'),$file);
-        return response()->json(['success'=>$file]);
+        // 
     }
 
     /**
@@ -100,9 +82,6 @@ class PostFileGalleryController extends Controller
      */
     public function destroy(PostFileGallery $postFileGallery)
     {
-        if(Storage::exists('/public/media/files/post_file_gallery/'.$postFileGallery->file)){
-            Storage::delete(['public/media/files/post_file_gallery/' . $postFileGallery->file]);
-        }
-        $postFileGallery->delete();
+        // 
     }
 }

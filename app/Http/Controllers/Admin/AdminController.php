@@ -23,23 +23,17 @@ class AdminController extends Controller
 
     public function admin()
     {
-        $admins = Admin::with(['role', 'adminProfile'])->where('role_id', 1)->get();
-        return view('admin_dashboard.user.administrator', compact('admins'));
+        // 
     }
 
     public function user()
     {
-        $users = User::with(['role', 'userProfile'])->get();
-        return view('admin_dashboard.user.user', compact('users'));
+        // 
     }
 
     public function deleteUser(User $user)
     {
-        if ($user->delete()) {
-            return redirect()->route('admin.user.user')->with('success', 'User successfully deleted');
-        } else {
-            return redirect()->route('admin.user.user')->with('error', 'User not deleted');
-        }
+        // 
     }
 
     /**

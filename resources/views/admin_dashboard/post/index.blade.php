@@ -25,7 +25,6 @@
                                     <th class="text-nowrap">Post</th>
                                     <th class="text-nowrap">Post Type</th>
                                     <th class="text-nowrap">Category</th>
-                                    <th class="text-nowrap">Author</th>
                                     <th class="text-nowrap">Page Views</th>
                                     <th class="text-nowrap">Added Date</th>
                                     <th class="d-print-none text-center">Option</th>
@@ -59,7 +58,6 @@
                                         <td class="border-end"><span class="small">{{ucwords($list->post_type)}}</span></td>
                                         <td class="border-end"><small class="text-white text-nowrap px-2 radius-30" style="background-color: {{$list->category->color}}">{{ucwords($list->category->name)}}</small>
                                         </td>
-                                        <td class="fw-bold small border-end">{{ucwords($list->author->name)}}</td>
                                         <td class="text-center border-end">{{$list->view_counts}}</td>
                                         <td class="border-end"><small>{{$list->created_at}}</small></td>
                                         <td class="dropdown d-print-none text-center">

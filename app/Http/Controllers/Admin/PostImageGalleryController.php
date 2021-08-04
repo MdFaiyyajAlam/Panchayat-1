@@ -16,20 +16,7 @@ class PostImageGalleryController extends Controller
      */
     public function index()
     {
-        $postImageGallery = PostImageGallery::all();
-        $url = asset('storage/media/images/post_image_gallery');
-        $img = '';
-        foreach ($postImageGallery as $value) {
-            $img .= '<div class="col-file-manager" id="img_col_id_'.$value->id.'">
-                        <div class="file-box" data-file-id="'.$value->id.'" data-mid-file-path="'.$url."/".$value->image.'" data-default-file-path="'.$url."/".$value->image.'" data-slider-file-path="'.$url."/".$value->image.'" data-big-file-path="'.$url."/".$value->image.'">
-                            <div class="image-container">
-                                <img src="'.$url."/".$value->image.'" alt="" class="w-100">
-                            </div>
-                            <span class="file-name">'.$value->image.'</span>
-                        </div>
-                    </div>';
-        }
-        return $img;
+        // 
     }
 
     /**
@@ -50,14 +37,7 @@ class PostImageGalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $image = $request->file('file');
-        // return $image->name; die;
-        $img = date('Y-m-d'). '-at-' . date('H-i-s') .'.'.$image->extension();
-        PostImageGallery::create([
-            'image' => $img,
-        ]);
-        $image->move(public_path('storage/media/images/post_image_gallery/'),$img);
-        return response()->json(['success'=>$img]);
+        // 
     }
 
     /**
@@ -102,9 +82,6 @@ class PostImageGalleryController extends Controller
      */
     public function destroy(PostImageGallery $postImageGallery)
     {
-        if(Storage::exists('/public/media/images/post_image_gallery/'.$postImageGallery->image)){
-            Storage::delete(['public/media/images/post_image_gallery/' . $postImageGallery->image]);
-        }
-        $postImageGallery->delete();
+        // 
     }
 }

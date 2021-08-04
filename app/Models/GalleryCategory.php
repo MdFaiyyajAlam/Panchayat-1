@@ -14,13 +14,4 @@ class GalleryCategory extends Model
         'gallery_album_id',
     ];
 
-    public function images()
-    {
-        return $this->hasMany(GalleryImage::class, 'gallery_category_id', 'id');
-    }
-
-    public function album()
-    {
-        return $this->belongsTo(GalleryAlbum::class, 'gallery_album_id', 'id');
-    }
 }

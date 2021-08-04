@@ -14,14 +14,5 @@ class PostFile extends Model
         'post_file_gallery_id',
     ];
 
-    function postFile()
-    {
-        return $this->belongsTo(Post::class, 'post_id', 'id');
-    }
-
-    public function postFileGallery()
-    {
-        return $this->belongsTo(PostFileGallery::class, 'post_file_gallery_id', 'id');
-    }
-
+    
 }

@@ -57,19 +57,9 @@ class Post extends Model
         return $this->belongsTo(Subcategory::class, 'subcategory_id', 'id');
     }
 
-    function author()
-    {
-        return $this->belongsTo(Admin::class, 'author_id', 'id');
-    }
-
     function mainImage()
     {
         return $this->belongsTo(PostImageGallery::class, 'post_image_gallery_id', 'id');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'post_id', 'id');
     }
 
 }

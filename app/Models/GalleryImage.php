@@ -16,13 +16,4 @@ class GalleryImage extends Model
         'gallery_category_id',
     ];
 
-    public function album()
-    {
-        return $this->belongsTo(GalleryAlbum::class, 'gallery_album_id', 'id');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(GalleryCategory::class, 'gallery_category_id', 'id');
-    }
 }

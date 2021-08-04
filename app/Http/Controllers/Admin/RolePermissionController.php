@@ -56,7 +56,7 @@ class RolePermissionController extends Controller
      * @param  \App\Models\RolePermission  $rolesPermission
      * @return \Illuminate\Http\Response
      */
-    public function edit(RolePermission $rolePermission
+    public function edit(RolePermission $rolePermission)
     {
         //
     }

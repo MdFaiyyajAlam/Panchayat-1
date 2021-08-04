@@ -16,8 +16,9 @@
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container">
               <a class="navbar-brand" href="#">
-                  <div class="logo">
-                      <img src="{{asset('assets_home\img\logo.png')}}" alt="">
+                  <div class="logo d-flex">
+                    <img src="{{ asset('assets/images/logo-icon.png') }}" alt="{{ config('app.name', '') }}" class="me-2" style="width: 30px;height:30px;">
+                    <h4 class="logo-text">{{ config('app.name', '') }}</h4>
                   </div>
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +47,6 @@
                       </li>
 
                   @endforeach
-
-
 
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('about')}}">About</a>

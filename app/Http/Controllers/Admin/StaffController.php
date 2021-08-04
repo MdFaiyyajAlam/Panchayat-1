@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\ContactMessage;
+use App\Models\Role;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
-class ContactMessageController extends Controller
+class StaffController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +27,7 @@ class ContactMessageController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -36,16 +38,16 @@ class ContactMessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ContactMessage  $contactMessage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ContactMessage $contactMessage)
+    public function show(Admin $admin)
     {
         //
     }
@@ -53,34 +55,34 @@ class ContactMessageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ContactMessage  $contactMessage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ContactMessage $contactMessage)
+    public function edit(Admin $admin)
     {
-        //
+        // 
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ContactMessage  $contactMessage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactMessage $contactMessage)
+    public function update(Request $request, Admin $admin)
     {
-        //
+        // 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ContactMessage  $contactMessage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactMessage $contactMessage)
+    public function destroy(Admin $admin)
     {
-                // 
+        // 
     }
 }

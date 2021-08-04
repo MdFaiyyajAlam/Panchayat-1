@@ -16,13 +16,12 @@ class NewsletterSubscriberController extends Controller
      */
     public function index()
     {
-        $subscriber = NewsletterSubscriber::all();
-        return view('admin_dashboard.newsletter-subscriber.index', compact('subscriber'));
+        // 
     }
 
     public function sendNewsletter(Newsletter $newsletter)
     {
-        return view('admin_dashboard.newsletter-subscriber.sendnewsletter', compact('newsletter'));
+        // 
     }
 
     /**
@@ -44,10 +43,6 @@ class NewsletterSubscriberController extends Controller
      */
     public function destroy(NewsletterSubscriber $newsletterSubscriber)
     {
-        if ($newsletterSubscriber->delete()) {
-            return redirect()->route('admin.newsletter.view')->with('success', 'Subscriber successfully deleted');
-        } else {
-            return redirect()->route('admin.newsletter.view')->with('error', 'Subscriber not deleted');
-        }
+        // 
     }
 }

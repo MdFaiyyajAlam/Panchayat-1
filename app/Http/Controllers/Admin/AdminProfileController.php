@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class ContactMessageController extends Controller
+class AdminProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class ContactMessageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ContactMessage  $contactMessage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ContactMessage $contactMessage)
+    public function show($id)
     {
         //
     }
@@ -53,10 +53,10 @@ class ContactMessageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ContactMessage  $contactMessage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ContactMessage $contactMessage)
+    public function edit($id)
     {
         //
     }
@@ -65,10 +65,10 @@ class ContactMessageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ContactMessage  $contactMessage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactMessage $contactMessage)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,11 +76,11 @@ class ContactMessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ContactMessage  $contactMessage
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactMessage $contactMessage)
+    public function destroy($id)
     {
-                // 
+        //
     }
 }

@@ -6,43 +6,33 @@
 <section id="main-carousel">
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
+            @foreach ($posts->take(1)->get() as $post)
             <div class="carousel-item active">
-                <img src="{{asset('assets_home\img\car-img2.jpg')}}" class="d-block w-100" alt="">
+                <img src="{{$post->post_image_gallery_id ? asset('storage/media/images/post_image_gallery/'.$post->mainImage->image) : ''}}" alt="{{$post->title}}" class="d-block w-100">
                 <div class="content">
                     <div class="car-content">
-                       <a href="">
-                        <h1> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quisquam? </h1>
-                        <h5 class="mt-4"> Lorem ipsum dolor sit amet consectetur. </h5>
+                       <a href="{{route('post.view', [$post->slug])}}">
+                        <h1>{{ucfirst($post->title)}}</h1>
+                        {{-- <h5 class="mt-4"> Lorem ipsum dolor sit amet consectetur. </h5> --}}
                        </a>
                     </div>
                 </div>
-              </div>
-
-              <div class="carousel-item">
-                <img src="{{asset('assets_home\img\car-img3.jpg')}}" class="d-block w-100" alt="">
-                 <div class="content">
-                    <div class="car-content">
-                       <a href="">
-                        <h1> Lorem ipsum dolor sit amet consectetur elit. Nulla, quisquam? </h1>
-                        <h5 class="mt-4"> Lorem ipsum dolor sit amet consectetur. </h5>
-                       </a>
-                    </div>
-                </div>
-              </div>
-
-            <div class="carousel-item">
-                <img src="{{asset('assets_home\img\newspaper-car.jpg')}}" class="d-block w-100" alt="">
-
-                    <div class="content">
-                    <div class="car-content">
-                       <a href="">
-                        <h1> Lorem ipsum dolor sit Lorem, ipsum dolor. amet sit consectetur adipisicing elit. Nulla, quisquam? </h1>
-                        <h5 class="mt-4"> Lorem ipsum dolor sit amet consectetur. </h5>
-                       </a>
-                    </div>
-                </div>
-
             </div>
+            @endforeach
+            
+            @foreach ($posts->skip(1)->get() as $post)
+            <div class="carousel-item">
+                <img src="{{$post->post_image_gallery_id ? asset('storage/media/images/post_image_gallery/'.$post->mainImage->image) : ''}}" alt="{{$post->title}}" class="d-block w-100">
+                <div class="content">
+                    <div class="car-content">
+                       <a href="{{route('post.view', [$post->slug])}}">
+                        <h1>{{ucfirst($post->title)}}</h1>
+                        {{-- <h5 class="mt-4"> Lorem ipsum dolor sit amet consectetur. </h5> --}}
+                       </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

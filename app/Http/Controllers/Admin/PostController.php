@@ -97,36 +97,11 @@ class PostController extends Controller
             'image_desc' => trim(strtolower($request->input('image_desc'))),
             'category_id' => $request->input('category_id'),
             'subcategory_id' => $request->input('subcategory_id'),
-            'author_id' => Auth::user()->id,
             'status' => $request->input('status'),
             'scheduled_post_date' => $scheduled,
         ]);
 
-        if ($save) {
-            // Post Images
-            if (isset($postImg)) {
-                foreach ($postImg as $val) {
-                    PostImage::create([
-                        'post_id' => $save->id,
-                        'post_image_gallery_id' => $val,
-                    ]);
-                }
-            }
-            // Post Files
-            if (isset($postfiles)) {
-                foreach ($postfiles as $file) {
-                    PostFile::create([
-                        'post_id' => $save->id,
-                        'post_file_gallery_id' => $file,
-                    ]);
-                }
-            }
-
-            return redirect()->route('admin.post.create')->with('success', 'Post successfully created');
-            
-        } else {
-            return redirect()->route('admin.post.create')->with('error', 'Post not created');
-        }
+        return redirect()->route('admin.post.create')->with('success', 'Post created');
     }
 
     /**
@@ -166,80 +141,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $postImg = $request->input('additional_post_image_id');
-        $postfiles = $request->input('post_selected_file_id');
-        
-        $request->validate([
-            'title' => 'required',
-            'slug' => 'unique:posts,slug,'.$post->id,
-            'content' => 'required',
-            'category_id' => 'required',
-        ]);
-
-        $post->post_type = trim(strtolower($request->input('post_type')));
-        $post->title = trim(strtolower($request->input('title')));
-        $post->slug = trim(strtolower($request->input('slug')));
-        $post->description = trim(strtolower($request->input('description')));
-        $post->keywords = trim(strtolower($request->input('keywords')));
-        $post->visibility = $request->input('visibility');
-        $post->show_right_column = $request->input('show_right_column');
-        $post->featured = $request->input('is_featured') ?? 0;
-        $post->breaking = $request->input('is_breaking') ?? 0;
-        $post->slider = $request->input('is_slider') ?? 0;
-        $post->recommended = $request->input('is_recommended') ?? 0;
-        $post->show_auth_user = $request->input('show_auth') ?? 0;
-        $post->send_subscriber = $request->input('send_to_subscriber') ?? 0;
-        $post->tags = trim(strtolower($request->input('tags')));
-        $post->opt_url = trim(strtolower($request->input('opt_url')));
-        $post->content = trim(strtolower($request->input('content')));
-        $post->post_image_gallery_id = $request->input('post_image_id');
-        $post->opt_image_url = trim(strtolower($request->input('opt_main_image_url')));
-        $post->image_desc = trim(strtolower($request->input('image_desc')));
-        $post->category_id = $request->input('category_id');
-        $post->subcategory_id = $request->input('subcategory_id');
-        $post->author_id = Auth::user()->id;
-        $post->status = $request->input('status');
-        if (isset($request->scheduled_post)) {
-            $post->scheduled_post_date = $request->input('date_published');
-        } else {
-            $post->scheduled_post_date = null;
-        }
-
-        if ($post->save()) {
-            // Post Images
-            if (isset($post->postSlider)) {
-                foreach ($post->postSlider as $list) {
-                    $list->delete();
-                }
-            }
-            if (isset($postImg)) {
-                foreach ($postImg as $val) {
-                    PostImage::create([
-                        'post_id' => $post->id,
-                        'post_image_gallery_id' => $val,
-                    ]);
-                }
-            }
-            // Post Files
-            if (isset($post->postFile)) {
-                foreach ($post->postFile as $list) {
-                    $list->delete();
-                }
-            }
-            if (isset($postfiles)) {
-                foreach ($postfiles as $file) {
-                    PostFile::create([
-                        'post_id' => $post->id,
-                        'post_file_gallery_id' => $file,
-                    ]);
-                }
-            }
-
-            return redirect()->route('admin.post.view')->with('success', 'Post successfully updated');
-            
-        } else {
-            return redirect()->route('admin.post.view')->with('error', 'Post not updated');
-        }
+        // 
     }
 
     /**
@@ -250,16 +152,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if ($post->postSlider()->delete()) {
-            $post->postFile()->delete();
-            $post->delete();
-            if ($post->delete()) {
-                return redirect()->route('admin.post.view')->with('success', 'Post successfully deleted');
-            } else {
-                return redirect()->route('admin.post.view')->with('error', 'Post not deleted');
-            }
-        }
-        return redirect()->route('admin.post.view')->with('error', 'Post not deleted');       
+        //    
     }
 
     public function bulkPost()

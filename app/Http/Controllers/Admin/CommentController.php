@@ -15,14 +15,12 @@ class CommentController extends Controller
      */
     public function pending()
     {
-        $comments = Comment::whereStatus(0)->get();
-        return view('admin_dashboard.comment.pending', compact('comments'));
+        // 
     }
 
     public function approved()
     {
-        $comments = Comment::whereStatus(1)->get();
-        return view('admin_dashboard.comment.approved', compact('comments'));
+        // 
     }
 
     /**
@@ -33,7 +31,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        return view('admin_dashboard.comment.edit-pending', compact('comment'));
+        // 
     }
 
     /**
@@ -45,36 +43,17 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        $request->validate([
-            'status' => 'required',
-        ]);
-        
-        $comment->status = $request->input('status');
-        if ($comment->save()) {
-            return redirect()->route('admin.comment.pending')->with('success', 'Comment successfully approved');
-        } else {
-            return redirect()->route('admin.comment.pending')->with('error', 'Comment not approved');
-        }
+        // 
         
     }
 
     public function destroyPending(Comment $comment)
     {
-        $deleted = $comment->delete();
-        if ($deleted) {
-            return redirect()->route('admin.comment.pending')->with('success', 'Comment successfully deleted');
-        } else {
-            return redirect()->route('admin.comment.pending')->with('error', 'Comment not deleted');
-        }
+        // 
     }
 
     public function destroyApproved(Comment $comment)
     {
-        $deleted = $comment->delete();
-        if ($deleted) {
-            return redirect()->route('admin.comment.approved')->with('success', 'Comment successfully deleted');
-        } else {
-            return redirect()->route('admin.comment.approved')->with('error', 'Comment not deleted');
-        }
+        // 
     }
 }
